@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import cv2 as cv
 import numpy as np
 
@@ -15,14 +15,14 @@ def index():
 frame = None  # global variable to keep single JPG
 
 
-@app.route('/upload', methods=['PUT'])
-def upload():
+@app.route('/upload/<string:lookup_sign>', methods=['PUT'])
+def upload(lookup_sign):
     global frame
     # keep jpg data in global variable
     frame = request.data
     decoded = cv.imdecode(np.frombuffer(request.data, np.uint8), -1)
-    print(type(decoded))
-    return model.detect(decoded, "stop")
+    print("RECEIVED REQUEST WITH SIGN: ", lookup_sign)
+    return jsonify(model.detect(decoded, lookup_sign))
 
 
 if __name__ == '__main__':

@@ -11,11 +11,16 @@ class ModelDetector:
         self.model = torch.hub.load('model/ultralytics', 'custom', path='model/best.pt', force_reload=True,
                                     trust_repo=True, source='local')
 
-    def detect(self, frame, lookupSignal):
-        print("***************** ENTERED MODEL DETECTION")
+    def detect(self, frame, lookup_sign):
         results = self.model(frame)
         print(results)
-        if lookupSignal in str(results):
-            return f"Se encontró la señal '{lookupSignal}'."
+        if lookup_sign in str(results):
+            return {
+                'lookup_sign': lookup_sign,
+                'found': True
+            }
         else:
-            return f"No se encontró la señal '{lookupSignal}'."
+            return {
+                'lookup_sign': lookup_sign,
+                'found': False
+            }
