@@ -35,7 +35,7 @@ def steer():
     if request.method == 'POST':
         data = request.json
         car_data.set_steering(data['steer'])
-        return 200
+        return jsonify({'message': 'Steering status updated successfully'}), 200
     else:
         return jsonify({'error': 'Only POST requests are accepted'}), 405
 
@@ -45,7 +45,7 @@ def speed():
     if request.method == 'POST':
         data = request.json
         car_data.set_speed(data['speed'])
-        return 200
+        return jsonify({'message': 'Speed status updated successfully'}), 200
     else:
         return jsonify({'error': 'Only POST requests are accepted'}), 405
 
@@ -55,7 +55,7 @@ def sign():
     if request.method == 'POST':
         data = request.json
         car_data.set_sign(data['sign'])
-        return 200
+        return jsonify({'message': 'Sign status updated successfully'}), 200
     else:
         return jsonify({'error': 'Only POST requests are accepted'}), 405
 
@@ -64,8 +64,8 @@ def sign():
 def brake():
     if request.method == 'POST':
         data = request.json
-        car_data.set_braking(data['brake'])
-        return 200
+        car_data.set_braking(data['braking'])
+        return jsonify({'message': 'Braking status updated successfully'}), 200
     else:
         return jsonify({'error': 'Only POST requests are accepted'}), 405
 
