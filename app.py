@@ -27,7 +27,9 @@ def upload(lookup_sign):
     frame = request.data
     decoded = cv.imdecode(np.frombuffer(request.data, np.uint8), -1)
     print("RECEIVED REQUEST WITH SIGN: ", lookup_sign)
-    return jsonify(model.detect(decoded, lookup_sign))
+    response = model.detect(decoded, lookup_sign)
+    print("RESPONSE: ", response)
+    return jsonify(response)
 
 
 @app.route('/steer', methods=['POST'])
